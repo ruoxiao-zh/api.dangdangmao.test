@@ -25,7 +25,9 @@ $api->version('v1', [
     ],
 ], function ($api) {
 
-    // 分类管理
+    /**
+     * 分类管理
+     */
     // 添加
     $api->post('category', 'CategoriesController@store')->name('api.category.store');
     // 更新
@@ -52,12 +54,11 @@ $api->version('v1', [
 //        // 管理员登出
 //        $api->delete('authorizations/current', 'AuthorizationsController@destroy')
 //            ->name('api.authorizations.destroy');
-
-        // 商品分类
-        $api->get('categories', 'TaoBaoController@category');
         // 商品列表
-        $api->get('items', 'TaoBaoController@item');
+        $api->get('items', 'TaoBaoController@items')->name('tbk.items');
         // 商品详情
-        $api->get('item-info', 'TaoBaoController@itemInfo');
+        $api->get('item-info', 'TaoBaoController@itemInfo')->name('tbk.item.info');
+        // 关联商品推荐列表
+        $api->get('recommend-items', 'TaoBaoController@recommendItems')->name('tbk.recommend.items');
     });
 });
