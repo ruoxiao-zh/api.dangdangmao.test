@@ -60,5 +60,10 @@ $api->version('v1', [
         $api->get('item-info', 'TaoBaoController@itemInfo')->name('tbk.item.info');
         // 关联商品推荐列表
         $api->get('recommend-items', 'TaoBaoController@recommendItems')->name('tbk.recommend.items');
+        // 阿里妈妈推广券信息查询
+        $api->get('coupon', 'TaoBaoController@coupon')->name('tbk.coupon');
+
+        // 通用物料搜索
+        $api->get('dg-material-optional', 'TaoBaoController@dgMaterialOptional')->name('tbk.dg.material.optional');
     });
 });
