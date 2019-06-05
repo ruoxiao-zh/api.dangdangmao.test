@@ -24,7 +24,22 @@ $api->version('v1', [
         'change-locale',
     ],
 ], function ($api) {
-    $api->group(['prefix' => 'admin'], function ($api) {
+
+    // 分类管理
+    // 添加
+    $api->post('category', 'CategoriesController@store')->name('api.category.store');
+    // 更新
+    $api->patch('category/{category}', 'CategoriesController@update')->name('api.category.update');
+    // 删除
+    $api->delete('category/{category}', 'CategoriesController@destroy')->name('api.category.destroy');
+    // 列表
+    $api->get('categories', 'CategoriesController@index')->name('api.categories.list');
+    // 详情
+    $api->get('category/{category}', 'CategoriesController@show')->name('api.category.show');
+
+
+    // 淘宝客
+    $api->group(['prefix' => 'tbk'], function ($api) {
 //        // 管理员登录图片验证码
 //        $api->post('authorizations/captchas', 'CaptchasController@store')
 //            ->name('api.authorizations.captchas');
@@ -37,5 +52,12 @@ $api->version('v1', [
 //        // 管理员登出
 //        $api->delete('authorizations/current', 'AuthorizationsController@destroy')
 //            ->name('api.authorizations.destroy');
+
+        // 商品分类
+        $api->get('categories', 'TaoBaoController@category');
+        // 商品列表
+        $api->get('items', 'TaoBaoController@item');
+        // 商品详情
+        $api->get('item-info', 'TaoBaoController@itemInfo');
     });
 });
