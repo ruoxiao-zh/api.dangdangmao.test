@@ -6,6 +6,7 @@ use App\Http\Requests\Api\TaoBaoKe\ItemRequest;
 use Illuminate\Http\Request;
 use ETaobao\Factory;
 use Illuminate\Validation\Rule;
+use PHPUnit\Util\RegularExpression;
 
 require __DIR__ . '/../../../Sdk/Taobao/TopSdk.php';
 
@@ -16,10 +17,10 @@ class TaoBaoController extends Controller
     public function __construct()
     {
         $config = [
-            'appkey'    => env('TAOBAO_IOS_APP_KEY', ''),
-            'secretKey' => env('TAOBAO_IOS_APP_SECRET', ''),
+            'appkey'    => env('TAOBAO_PC_APP_KEY', ''),
+            'secretKey' => env('TAOBAO_PC_APP_SECRET', ''),
             'format'    => 'json',
-            'session'   => '',  //授权接口（sc类的接口）需要带上
+            'session'   => '',  // 授权接口（sc类的接口）需要带上
             'sandbox'   => false,
         ];
 
@@ -122,7 +123,7 @@ class TaoBaoController extends Controller
             'platform.in'       => '链接形式只能是 [1, 2] 中的一个值',
         ]);
 
-        $adzone_id = explode('_', env('TAOBAO_IOS_PID'))[3];
+        $adzone_id = explode('_', env('TAOBAO_PC_PID'))[3];
 
         $param = [
             'adzone_id'  => $adzone_id,
@@ -133,6 +134,45 @@ class TaoBaoController extends Controller
             'has_coupon' => 'true',
         ];
         $res = $this->taoBaoKeClient->dg->materialOptional($param);
+
+        return response()->json($res);
+    }
+
+    public function dgItemCoupon(Request $request)
+    {
+        $param = [
+            'adzone_id' => explode('_', env('TAOBAO_PC_PID'))[3],
+            'platform'  => (int)$request->platform,
+            'q'         => $request->q,
+            'page_no'   => (int)$request->page_no,
+        ];
+        $res = $this->taoBaoKeClient->dg->getCoupon($param);
+
+        return response()->json($res);
+    }
+
+//    public function dgNewuserOrder(Request $request)
+//    {
+//        $param = [
+//            'fields'     => 'tb_trade_parent_id,tb_trade_id,num_iid,item_title,item_num,price,pay_price,seller_nick,seller_shop_title,commission,commission_rate,unid,create_time,earning_time',
+//            'start_time' => '2015-03-05 13:52:08',
+//            'span'       => 600,
+//            'page_no'    => (int)$request->page_no,
+//        ];
+//        $res = $this->taoBaoKeClient->dg->getOrderNewUser($param);
+//
+//        return response()->json($res);
+//    }
+
+    public function rebateOrder(Request $request)
+    {
+        $param = [
+            'fields'     => 'tb_trade_parent_id,tb_trade_id,num_iid,item_title,item_num,price,pay_price,seller_nick,seller_shop_title,commission,commission_rate,unid,create_time,earning_time',
+            'start_time' => '2019-03-05 13:52:08',
+            'span'       => 60,
+            'page_no'    => (int)$request->page_no,
+        ];
+        $res = $this->taoBaoKeClient->rebate->getOrder($param);
 
         return response()->json($res);
     }

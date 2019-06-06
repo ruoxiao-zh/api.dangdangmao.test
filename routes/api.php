@@ -65,5 +65,12 @@ $api->version('v1', [
 
         // 通用物料搜索
         $api->get('dg-material-optional', 'TaoBaoController@dgMaterialOptional')->name('tbk.dg.material.optional');
+        // 好券清单
+        $api->get('dg-item-coupon', 'TaoBaoController@dgItemCoupon')->name('tbk.dg.item.coupon');
+        // 淘宝客新用户订单
+        // $api->get('dg-newuser-order', 'TaoBaoController@dgNewuserOrder')->name('tbk.dg.newuser.order');
+
+        // 淘宝客返利订单查询
+        $api->get('rebate-order', 'TaoBaoController@rebateOrder')->name('tbk.rebate.order');
     });
 });
