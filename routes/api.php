@@ -25,6 +25,26 @@ $api->version('v1', [
     ],
 ], function ($api) {
 
+    // 登录图片验证码
+//    $api->post('authorizations/captchas', 'CaptchasController@store')
+//        ->name('api.authorizations.captchas');
+    // 登录
+    $api->post('authorizations/login', 'AuthorizationsController@store')
+        ->name('api.authorizations.login');
+    // 刷新 JWT 令牌
+    $api->put('authorizations/current', 'AuthorizationsController@update')
+        ->name('api.authorizations.current');
+    // 登出
+    $api->delete('authorizations/current', 'AuthorizationsController@destroy')
+        ->name('api.authorizations.destroy');
+
+    // 淘宝客
+    $api->group(['middleware' => 'api.auth'], function ($api) {
+        // 用户详情
+        $api->get('authorizations/me', 'AuthorizationsController@me')
+            ->name('api.authorizations.,me');
+    });
+
     /**
      * 分类管理
      */
@@ -42,18 +62,6 @@ $api->version('v1', [
 
     // 淘宝客
     $api->group(['prefix' => 'tbk'], function ($api) {
-//        // 管理员登录图片验证码
-//        $api->post('authorizations/captchas', 'CaptchasController@store')
-//            ->name('api.authorizations.captchas');
-//        // 管理员登录
-//        $api->post('authorizations/login', 'AuthorizationsController@store')
-//            ->name('api.authorizations.login');
-//        // 刷新 JWT 令牌
-//        $api->put('authorizations/current', 'AuthorizationsController@update')
-//            ->name('api.authorizations.current');
-//        // 管理员登出
-//        $api->delete('authorizations/current', 'AuthorizationsController@destroy')
-//            ->name('api.authorizations.destroy');
         // 商品列表
         $api->get('items', 'TaoBaoController@items')->name('tbk.items');
         // 商品详情

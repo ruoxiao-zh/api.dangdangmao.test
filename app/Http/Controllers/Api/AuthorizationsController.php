@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Api\Admin;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\Admin\AuthorizationRequest;
-use App\Models\AdminUser;
-use App\Transformers\Admin\AdminUserTransformer;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Api\Controller;
+use App\Models\User;
+use App\Transformers\UserTransformer;
+use App\Http\Requests\Api\AuthorizationRequest;
 
 class AuthorizationsController extends Controller
 {
     public function store(AuthorizationRequest $request)
     {
         // 验证验证码
-        $this->verificationCode($request);
+        // $this->verificationCode($request);
 
-        if ( !$adminUser = AdminUser::whereAccount($request->account)->wherePassword(md5($request->password))->first()) {
+        if ( !$user = User::where('UserId', $request->phone)->wherePassword(md5($request->password))->first()) {
             return $this->response->errorUnauthorized('用户名或密码错误');
         }
 
-        $token = auth('admin')->fromUser($adminUser);
+        $token = auth('api')->fromUser($user);
 
         return $this->respondWithToken($token);
     }
@@ -42,20 +40,20 @@ class AuthorizationsController extends Controller
 
     public function update()
     {
-        $token = auth('admin')->refresh();
+        $token = auth('api')->refresh();
 
         return $this->respondWithToken($token);
     }
 
     public function destroy()
     {
-        auth('admin')->logout();
+        auth('api')->logout();
 
         return $this->response->noContent();
     }
 
     public function me()
     {
-        return $this->response->item($this->user(), new AdminUserTransformer());
+        return $this->response->item($this->user(), new UserTransformer());
     }
 }
