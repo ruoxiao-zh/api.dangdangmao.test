@@ -6,7 +6,6 @@ use App\Http\Requests\Api\TaoBaoKe\ItemRequest;
 use Illuminate\Http\Request;
 use ETaobao\Factory;
 use Illuminate\Validation\Rule;
-use PHPUnit\Util\RegularExpression;
 
 require __DIR__ . '/../../../Sdk/Taobao/TopSdk.php';
 
@@ -134,6 +133,18 @@ class TaoBaoController extends Controller
             'has_coupon' => 'true',
         ];
         $res = $this->taoBaoKeClient->dg->materialOptional($param);
+
+        return response()->json($res);
+    }
+
+    public function dgOptimusMaterial(Request $request)
+    {
+        $param = [
+            'adzone_id'   => explode('_', env('TAOBAO_PC_PID'))[3],
+            'material_id' => (int)$request->material_id,
+            'page_no'     => (int)$request->page_no,
+        ];
+        $res = $this->taoBaoKeClient->dg->materialOptimus($param);
 
         return response()->json($res);
     }
