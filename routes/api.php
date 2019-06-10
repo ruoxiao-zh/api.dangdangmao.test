@@ -99,5 +99,7 @@ $api->version('v1', [
         $api->get('common-promotion', 'JDController@commonPromotion')->name('jd.common.promotion');
         // 京粉精选商品查询接口
         $api->get('goods-jingfen', 'JDController@goodsJingfen')->name('jd.goods.jingfen');
+        // 关键词商品查询
+        // $api->get('goods', 'JDController@goods')->name('jd.goods');
     });
 });

@@ -140,11 +140,6 @@ class JDController extends Controller
             'positionId' => env('JD_ANDROID_PROMOTION_ID'),
         ]);
 
-//        $result = [];
-//        if ($res) {
-//            $result['data'] = $res;
-//        }
-
         return response()->json($res);
     }
 
@@ -161,6 +156,28 @@ class JDController extends Controller
         ]);
 
         $res = $this->JDClient->good->jingfen($request->eliteId, $request->pageIndex, 20);
+
+        return response()->json($res);
+    }
+
+    public function goods(Request $request)
+    {
+        $this->validate($request, [
+            'pageIndex' => 'required|integer',
+            'keyword'   => 'required|string',
+        ], [
+            'pageIndex.required' => '页码不能为空',
+            'pageIndex.integer'  => '页码必须是整数类型',
+            'keyword.required'   => '查询关键词不能为空',
+            'keyword.string'     => '查询关键词必须是字符串数据类型',
+        ]);
+
+        $res = $this->JDClient->good->query([
+            'pageNo'   => $request->pageNo,
+            'pageSize' => 20,
+            'keyword'  => $request->keyword,
+            'isCoupon' => 1,
+        ]);
 
         return response()->json($res);
     }
