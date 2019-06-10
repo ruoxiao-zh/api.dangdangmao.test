@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use ETaobao\Factory;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 
@@ -42,6 +41,27 @@ class JDController extends Controller
         ];
 
         $this->JDClient = new \JdMediaSdk\JdFatory($config);
+    }
+
+    public function order(Request $request)
+    {
+        $this->validate($request, [
+            'pageNo' => 'required|integer',
+            'type'   => 'required|integer',
+        ], [
+            'pageNo.required' => '页码不能为空',
+            'pageNo.integer'  => '页码必须是整数类型',
+            'type.required'   => '订单时间查询类型不能为空',
+            'type.integer'    => '订单时间查询类型串必须是整数类型',
+        ]);
+        $res = $this->JDClient->promotion->order([
+            'pageNo'   => $request->pageNo,
+            'pageSize' => 20,
+            'type'     => (int)$request->type,
+            'time'     => date('YmdHi', time()),
+        ]);
+
+        return response()->json($res);
     }
 
     public function promotionGoodsInfo(Request $request)
@@ -116,7 +136,7 @@ class JDController extends Controller
         ]);
 
         $res = $this->JDClient->link->get($request->materialId, [
-            'siteId' => env('JD_ANDROID_APP_ID', ''),
+            'siteId'     => env('JD_ANDROID_APP_ID', ''),
             'positionId' => env('JD_ANDROID_PROMOTION_ID'),
         ]);
 
@@ -134,8 +154,8 @@ class JDController extends Controller
             'eliteId'   => 'required|integer',
             'pageIndex' => 'required|integer',
         ], [
-            'eliteId.required' => '频道 ID 不能为空',
-            'eliteId.integer'  => '频道 ID 必须是整数类型',
+            'eliteId.required'   => '频道 ID 不能为空',
+            'eliteId.integer'    => '频道 ID 必须是整数类型',
             'pageIndex.required' => '页码不能为空',
             'pageIndex.integer'  => '页码必须是整数类型',
         ]);

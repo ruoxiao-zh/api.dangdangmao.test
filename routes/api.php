@@ -87,6 +87,8 @@ $api->version('v1', [
 
     // 京东
     $api->group(['prefix' => 'jd'], function ($api) {
+        // 订单查询接口
+        $api->get('order', 'JDController@order')->name('jd.order');
         // 获取推广商品信息
         $api->get('promotion-goods-info', 'JDController@promotionGoodsInfo')->name('jd.promotion.goods.info');
         // 商品类目查询
