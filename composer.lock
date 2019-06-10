@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3504c7a7500b94987925f944c9c9a9e7",
+    "content-hash": "5e3d9e27482dd34f5a2807bf7bdd97c7",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -1655,6 +1655,52 @@
             "time": "2018-12-04T20:46:45+00:00"
         },
         {
+            "name": "hanson/foundation-sdk",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Hanson/foundation-sdk.git",
+                "reference": "61d63a83ce2159678a7d059d72fa35393f88ca2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Hanson/foundation-sdk/zipball/61d63a83ce2159678a7d059d72fa35393f88ca2b",
+                "reference": "61d63a83ce2159678a7d059d72fa35393f88ca2b",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "doctrine/cache": "^1.6",
+                "guzzlehttp/guzzle": "^6.2",
+                "monolog/monolog": "^1.22",
+                "php": "^7.0",
+                "pimple/pimple": "^3.0",
+                "symfony/http-foundation": "^3.3|^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hanson\\Foundation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HanSon",
+                    "email": "h@hanc.cc"
+                }
+            ],
+            "time": "2018-12-17T03:17:13+00:00"
+        },
+        {
             "name": "iidestiny/flysystem-oss",
             "version": "1.3.3",
             "source": {
@@ -2066,6 +2112,60 @@
                 "useragent"
             ],
             "time": "2019-01-19T21:32:55+00:00"
+        },
+        {
+            "name": "justmd5/duoduoke-sdk",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justmd5/duoduoke-sdk.git",
+                "reference": "e31d973669d031e71e2d9c0ffa4faa67f5f92dff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justmd5/duoduoke-sdk/zipball/e31d973669d031e71e2d9c0ffa4faa67f5f92dff",
+                "reference": "e31d973669d031e71e2d9c0ffa4faa67f5f92dff",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-json": "*",
+                "hanson/foundation-sdk": "^3.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.2 || ^7.0 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Justmd5\\DuoDuoKe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "丁海军",
+                    "email": "heyjun2012@gmail.com"
+                }
+            ],
+            "description": "多多客API SDK【拼多多开放平台】.",
+            "keywords": [
+                "duoduoke",
+                "pinduoduo",
+                "sdk",
+                "多多客",
+                "拼多多"
+            ],
+            "time": "2019-03-17T10:35:39+00:00"
         },
         {
             "name": "laravel/framework",

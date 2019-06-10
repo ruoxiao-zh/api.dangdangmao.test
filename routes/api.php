@@ -102,4 +102,10 @@ $api->version('v1', [
         // 关键词商品查询
         // $api->get('goods', 'JDController@goods')->name('jd.goods');
     });
+
+    // 拼多多
+    $api->group(['prefix' => 'pinduoduo'], function ($api) {
+        // 商品列表
+        $api->get('goods-cats', 'PinDuoDuoController@goodsCats')->name('pinduoduo.goods.cats');
+    });
 });
