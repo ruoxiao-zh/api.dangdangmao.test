@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "307d05900eb77251bd1e744275382b6d",
+    "content-hash": "3504c7a7500b94987925f944c9c9a9e7",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -6408,6 +6408,48 @@
                 "validate"
             ],
             "time": "2018-12-25T11:19:39+00:00"
+        },
+        {
+            "name": "yumufeng/jd-union-sdk",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yumufeng/jd-union-sdk.git",
+                "reference": "cdb3acba65d2c659fb04d5171e190b2a7d4a30b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yumufeng/jd-union-sdk/zipball/cdb3acba65d2c659fb04d5171e190b2a7d4a30b2",
+                "reference": "cdb3acba65d2c659fb04d5171e190b2a7d4a30b2",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [],
+                "psr-4": {
+                    "JdMediaSdk\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "yumufeng",
+                    "email": "admin@yumufeng.com"
+                }
+            ],
+            "time": "2019-03-29T01:37:01+00:00"
         }
     ],
     "packages-dev": [

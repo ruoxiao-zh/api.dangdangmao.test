@@ -84,4 +84,18 @@ $api->version('v1', [
         // 淘宝客返利订单查询
         $api->get('rebate-order', 'TaoBaoController@rebateOrder')->name('tbk.rebate.order');
     });
+
+    // 京东
+    $api->group(['prefix' => 'jd'], function ($api) {
+        // 获取推广商品信息
+        $api->get('promotion-goods-info', 'JDController@promotionGoodsInfo')->name('jd.promotion.goods.info');
+        // 商品类目查询
+        $api->get('goods-category', 'JDController@goodsCategory')->name('jd.goods.category');
+        // 获取 PID
+        $api->get('user-pid', 'JDController@userPid')->name('jd.user.pid');
+        // 通用推广链接
+        $api->get('common-promotion', 'JDController@commonPromotion')->name('jd.common.promotion');
+        // 京粉精选商品查询接口
+        $api->get('goods-jingfen', 'JDController@goodsJingfen')->name('jd.goods.jingfen');
+    });
 });
