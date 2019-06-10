@@ -6,6 +6,7 @@ use App\Http\Requests\Api\TaoBaoKe\ItemRequest;
 use Illuminate\Http\Request;
 use ETaobao\Factory;
 use Illuminate\Validation\Rule;
+use Jenssegers\Agent\Agent;
 
 require __DIR__ . '/../../../Sdk/Taobao/TopSdk.php';
 
@@ -15,9 +16,21 @@ class TaoBaoController extends Controller
 
     public function __construct()
     {
+        $agent = new Agent();
+        if ($agent->isiOS()) {
+            $appkey = env('TAOBAO_IOS_APP_KEY', '');
+            $secretKey = env('TAOBAO_IOS_APP_SECRET', '');
+        } else if ($agent->isAndroidOS()) {
+            $appkey = env('TAOBAO_ANDROID_APP_KEY', '');
+            $secretKey = env('TAOBAO_ANDROID_APP_SECRET', '');
+        } else {
+            $appkey = env('TAOBAO_PC_APP_KEY', '');
+            $secretKey = env('TAOBAO_PC_APP_SECRET', '');
+        }
+
         $config = [
-            'appkey'    => env('TAOBAO_PC_APP_KEY', ''),
-            'secretKey' => env('TAOBAO_PC_APP_SECRET', ''),
+            'appkey'    => $appkey,
+            'secretKey' => $secretKey,
             'format'    => 'json',
             'session'   => '',  // 授权接口（sc类的接口）需要带上
             'sandbox'   => false,

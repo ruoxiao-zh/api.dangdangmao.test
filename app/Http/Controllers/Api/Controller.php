@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller as BaseController;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Jenssegers\Agent\Agent;
 
 class Controller extends BaseController
 {
