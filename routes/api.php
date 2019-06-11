@@ -116,12 +116,17 @@ $api->version('v1', [
         // 多多进宝商品查询
         $api->get('ddk-goods-search', 'PinDuoDuoController@ddkGoodsSearch')->name('ddk.goods.search');
         // 查询优惠券信息
-        $api->get('ddk-coupon-info', 'PinDuoDuoController@ddkCouponInfo')->name('ddk.coupon.info');
+        // $api->get('ddk-coupon-info', 'PinDuoDuoController@ddkCouponInfo')->name('ddk.coupon.info');
         // 获取商品基本信息
         $api->get('ddk-goods-basic-info', 'PinDuoDuoController@goodsBasicInfo')->name('ddk.goods.basic.info');
         // 查询订单详情
         $api->get('ddk-order-detail', 'PinDuoDuoController@orderDetail')->name('ddk.order.detail');
         // 定向推广商品
         // $api->get('ddk-direct-goods', 'PinDuoDuoController@directGoods')->name('ddk.direct.goods');
+        // 获取爆款排行商品
+        $api->get('ddk-top-goods-list', 'PinDuoDuoController@topGoodsList')->name('ddk.top.goods.list');
+        // 生成推广链接
+        $api->get('ddk-generate-goods-promotion-url', 'PinDuoDuoController@generateGoodsPromotionUrl')
+            ->name('ddk.generate.goods.promotion.url');
     });
 });

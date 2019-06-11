@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Justmd5\DuoDuoKe\DuoDuoKe;
+use PHPUnit\Util\RegularExpression;
 
 class PinDuoDuoController extends Controller
 {
@@ -86,7 +87,18 @@ class PinDuoDuoController extends Controller
 
     public function ddkCouponInfo(Request $request)
     {
+        $this->validate($request, [
+            'coupon_ids' => 'required|string',
+        ], [
+            'coupon_ids.required' => '优惠券 ID 不能为空',
+            'coupon_ids.string'   => '优惠券 ID 必须是字符串数据类型',
+        ]);
 
+        $result = $this->pinDuoDuoClient->request('pdd.ddk.coupon.info.query', [
+            'coupon_ids' => $request->coupon_ids,
+        ]);
+
+        return response()->json($result);
     }
 
     public function goodsBasicInfo(Request $request)
@@ -133,6 +145,39 @@ class PinDuoDuoController extends Controller
         $result = $this->pinDuoDuoClient->request('pdd.ddk.direct.goods.query', [
             'page'      => (int)$request->page,
             'page_size' => $request->page_size ?? 20,
+        ]);
+
+        return response()->json($result);
+    }
+
+    public function topGoodsList(Request $request)
+    {
+        $this->validate($request, [
+            'offset' => 'required|integer',
+        ], [
+            'offset.required' => 'offset 不能为空',
+            'offset.integer'  => 'offset 必须是整数数据类型',
+        ]);
+
+        $result = $this->pinDuoDuoClient->request('pdd.ddk.top.goods.list.query', [
+            'offset' => (int)$request->offset,
+        ]);
+
+        return response()->json($result);
+    }
+
+    public function generateGoodsPromotionUrl(Request $request)
+    {
+        $this->validate($request, [
+            'goods_id_list' => 'required|string',
+        ], [
+            'goods_id_list.required' => '商品 ID 不能为空',
+            'goods_id_list.string'   => '商品 ID 必须是整数数据类型',
+        ]);
+
+        $result = $this->pinDuoDuoClient->request('pdd.ddk.goods.promotion.url.generate', [
+            'p_id'          => env('PINDUODUO_PID', ''),
+            'goods_id_list' => $request->goods_id_list,
         ]);
 
         return response()->json($result);
