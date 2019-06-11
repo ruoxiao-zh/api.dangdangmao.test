@@ -60,6 +60,25 @@ $api->version('v1', [
         // 删除历史搜索记录
         $api->delete('history-search-keywords', 'Controller@deleteHistorySearchKeywords')
             ->name('api.history.search.keywords.delete');
+
+        /**
+         * 地址管理
+         */
+        // 列表
+        $api->get('addresses', 'AddressController@index')
+            ->name('api.addresses.index');
+        // 添加
+        $api->post('address', 'AddressController@store')
+            ->name('api.address.store');
+        // 修改
+        $api->patch('address/{address}', 'AddressController@update')
+            ->name('api.address.update');
+        // 详情
+        $api->get('address/{address}', 'AddressController@show')
+            ->name('api.address.show');
+        // 删除
+        $api->delete('address/{address}', 'AddressController@destroy')
+            ->name('api.address.destroy');
     });
 
     /**
