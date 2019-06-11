@@ -68,9 +68,12 @@ class Controller extends BaseController
 
     public function getHistorySearchKeywords()
     {
-        $historySearchKeywords = Cache::get($this->user_search_keywords_cache_key . $this->user()->id, function () {
-            return [];
-        });
+        $historySearchKeywords = [];
+        if ($this->user()) {
+            $historySearchKeywords = Cache::get($this->user_search_keywords_cache_key . $this->user()->id, function () {
+                return [];
+            });
+        }
 
         $result['data'] = [];
         if ($historySearchKeywords) {

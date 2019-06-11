@@ -41,6 +41,9 @@ $api->version('v1', [
     // 热门搜索记录
     $api->get('hot-search-keywords', 'Controller@getHotSearchKeywords')
         ->name('api.hot.search.keywords');
+    // 历史搜索记录
+    $api->get('history-search-keywords', 'Controller@getHistorySearchKeywords')
+        ->name('api.history.search.keywords');
 
     // 需要 token 令牌验证接口
     $api->group(['middleware' => 'api.auth'], function ($api) {
@@ -54,9 +57,6 @@ $api->version('v1', [
         $api->post('images/upload', 'ImageUploadHandlerController@upload')
             ->name('api.images.upload');
 
-        // 历史搜索记录
-        $api->get('history-search-keywords', 'Controller@getHistorySearchKeywords')
-            ->name('api.history.search.keywords');
         // 删除历史搜索记录
         $api->delete('history-search-keywords', 'Controller@deleteHistorySearchKeywords')
             ->name('api.history.search.keywords.delete');
