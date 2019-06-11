@@ -42,7 +42,10 @@ $api->version('v1', [
     $api->group(['middleware' => 'api.auth'], function ($api) {
         // 用户详情
         $api->get('authorizations/me', 'AuthorizationsController@me')
-            ->name('api.authorizations.,me');
+            ->name('api.authorizations.me');
+        // 用户详情
+        $api->patch('authorizations/me', 'UsersController@update')
+            ->name('api.user.me');
         // 图片上传
         $api->post('images/upload', 'ImageUploadHandlerController@upload')
             ->name('api.images.upload');
