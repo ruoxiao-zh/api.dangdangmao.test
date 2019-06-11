@@ -112,8 +112,16 @@ $api->version('v1', [
         // 招商推广计划商品
         $api->get('ddk-zs-unit-goods', 'PinDuoDuoController@zsUnitGoods')->name('pdd.ddk.zs.unit.goodss');
         // 获取爆款排行商品接口
-        $api->get('ddk-oauth-top-goods-list', 'PinDuoDuoController@oauthTopGoodsList')->name('pdd.ddk.oauth.top.goods.list');
+        // $api->get('ddk-oauth-top-goods-list', 'PinDuoDuoController@oauthTopGoodsList')->name('pdd.ddk.oauth.top.goods.list');
         // 多多进宝商品查询
-        $api->get('ddk-goods-search', 'PinDuoDuoController@ddkGoodsSearch')->name('dk.goods.search');
+        $api->get('ddk-goods-search', 'PinDuoDuoController@ddkGoodsSearch')->name('ddk.goods.search');
+        // 查询优惠券信息
+        $api->get('ddk-coupon-info', 'PinDuoDuoController@ddkCouponInfo')->name('ddk.coupon.info');
+        // 获取商品基本信息
+        $api->get('ddk-goods-basic-info', 'PinDuoDuoController@goodsBasicInfo')->name('ddk.goods.basic.info');
+        // 查询订单详情
+        $api->get('ddk-order-detail', 'PinDuoDuoController@orderDetail')->name('ddk.order.detail');
+        // 定向推广商品
+        // $api->get('ddk-direct-goods', 'PinDuoDuoController@directGoods')->name('ddk.direct.goods');
     });
 });
