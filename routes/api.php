@@ -104,8 +104,16 @@ $api->version('v1', [
     });
 
     // 拼多多
-    $api->group(['prefix' => 'pinduoduo'], function ($api) {
+    $api->group(['prefix' => 'pdd'], function ($api) {
         // 商品列表
-        $api->get('goods-cats', 'PinDuoDuoController@goodsCats')->name('pinduoduo.goods.cats');
+        $api->get('goods-cats', 'PinDuoDuoController@goodsCats')->name('pdd.ddk.goods.cats');
+        // 商品标签列表
+        $api->get('goods-opt', 'PinDuoDuoController@goodsOpt')->name('pdd.ddk.goods.opt');
+        // 招商推广计划商品
+        $api->get('ddk-zs-unit-goods', 'PinDuoDuoController@zsUnitGoods')->name('pdd.ddk.zs.unit.goodss');
+        // 获取爆款排行商品接口
+        $api->get('ddk-oauth-top-goods-list', 'PinDuoDuoController@oauthTopGoodsList')->name('pdd.ddk.oauth.top.goods.list');
+        // 多多进宝商品查询
+        $api->get('ddk-goods-search', 'PinDuoDuoController@ddkGoodsSearch')->name('dk.goods.search');
     });
 });
