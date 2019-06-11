@@ -172,6 +172,9 @@ class TaoBaoController extends Controller
         ];
         $res = $this->taoBaoKeClient->dg->getCoupon($param);
 
+        // 添加搜索记录
+        $this->addSearchKeywordsToCache($request->q);
+
         return response()->json($res);
     }
 
