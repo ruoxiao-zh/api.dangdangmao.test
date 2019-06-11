@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Handler;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\Handler\ImageUploadHandlerRequest;
 use App\Http\Controllers\Api\Controller;
@@ -14,7 +14,7 @@ class ImageUploadHandlerController extends Controller
     private function save($file, $folder)
     {
         // 文件夹，值如：uploads/images/avatars/201709/21/
-        $folderName = "images/$folder/" . date('Ym/d', time());
+        $folderName = "dangdangmao/$folder/" . date('Ym/d', time());
         // 文件后缀名
         $extension = strtolower($file->getClientOriginalExtension()) ?: 'png';
         // 拼接文件名
@@ -40,6 +40,6 @@ class ImageUploadHandlerController extends Controller
     // 图片上传
     public function upload(ImageUploadHandlerRequest $request)
     {
-        return $this->save($request->image, $request->dirname);
+        return $this->save($request->avatar, $request->dirname);
     }
 }

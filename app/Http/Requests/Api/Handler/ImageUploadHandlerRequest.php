@@ -9,7 +9,7 @@ class ImageUploadHandlerRequest extends BaseRequest
     public function rules()
     {
         return [
-            'images'  => 'mimes:jpg,jpeg,bmp,png,gif|dimensions:min_width=80,min_height=80',
+            'avatar'  => 'mimes:jpg,jpeg,bmp,png,gif|dimensions:min_width=80,min_height=80',
             'dirname' => 'required',
         ];
     }

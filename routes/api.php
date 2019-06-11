@@ -38,11 +38,14 @@ $api->version('v1', [
     $api->delete('authorizations/current', 'AuthorizationsController@destroy')
         ->name('api.authorizations.destroy');
 
-    // 淘宝客
+    // 需要 token 令牌验证接口
     $api->group(['middleware' => 'api.auth'], function ($api) {
         // 用户详情
         $api->get('authorizations/me', 'AuthorizationsController@me')
             ->name('api.authorizations.,me');
+        // 图片上传
+        $api->post('images/upload', 'ImageUploadHandlerController@upload')
+            ->name('api.images.upload');
     });
 
     /**

@@ -48,6 +48,6 @@ class GenerateUserToken extends Command
 
         // 一年以后过期
         $ttl = 365 * 24 * 60;
-        $this->info(\Auth::guard('users')->setTTL($ttl)->fromUser($adminUser));
+        $this->info(\Auth::guard('api')->setTTL($ttl)->fromUser($adminUser));
     }
 }
