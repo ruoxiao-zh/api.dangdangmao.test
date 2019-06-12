@@ -124,13 +124,13 @@ class TaoBaoController extends Controller
     public function dgMaterialOptional(Request $request)
     {
         $this->validate($request, [
-            'q'        => 'required',
+            // 'q'        => 'required',
             'platform' => [
                 'required',
                 Rule::in([1, 2]),
             ],
         ], [
-            'q.required'        => '商品查询词不能为空',
+            // 'q.required'        => '商品查询词不能为空',
             'platform.required' => '链接形式不能为空',
             'platform.in'       => '链接形式只能是 [1, 2] 中的一个值',
         ]);
@@ -139,11 +139,12 @@ class TaoBaoController extends Controller
 
         $param = [
             'adzone_id'  => $adzone_id,
-            'is_tmall'   => 'true',
+            'is_tmall'   => $request->is_tmall,
             'q'          => $request->q,
             'page_no'    => (int)$request->page_no,
             'platform'   => (int)$request->platform,
             'has_coupon' => 'true',
+            'sort'       => $request->sort,
         ];
         $res = $this->taoBaoKeClient->dg->materialOptional($param);
 
