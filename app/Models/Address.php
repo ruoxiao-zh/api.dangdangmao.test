@@ -13,4 +13,17 @@ class Address extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('Id', 'desc');
+    }
+
+    public function completeAddress()
+    {
+        return ProvinceAndCity::whereCode($this->Province)->value('AreaName') .
+            ProvinceAndCity::whereCode($this->City)->value('AreaName') .
+            ProvinceAndCity::whereCode($this->County)->value('AreaName') .
+            $this->Address;
+    }
 }

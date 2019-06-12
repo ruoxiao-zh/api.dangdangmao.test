@@ -45,6 +45,10 @@ $api->version('v1', [
     $api->get('history-search-keywords', 'Controller@getHistorySearchKeywords')
         ->name('api.history.search.keywords');
 
+    // 获取省市县信息
+    $api->get('province-and-cities', 'AddressController@getProvinceAndCityInfo')
+        ->name('api.address.province-and-cities');
+
     // 需要 token 令牌验证接口
     $api->group(['middleware' => 'api.auth'], function ($api) {
         // 用户详情
