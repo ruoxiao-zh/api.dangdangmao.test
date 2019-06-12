@@ -172,5 +172,8 @@ $api->version('v1', [
         // 生成推广链接
         $api->get('ddk-generate-goods-promotion-url', 'PinDuoDuoController@generateGoodsPromotionUrl')
             ->name('ddk.generate.goods.promotion.url');
+        // 多多进宝商品详情查询
+        $api->get('ddk-goods-detail', 'PinDuoDuoController@goodsDetail')
+            ->name('ddk.goods.detail');
     });
 });

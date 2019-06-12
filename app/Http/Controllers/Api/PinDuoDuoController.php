@@ -182,4 +182,20 @@ class PinDuoDuoController extends Controller
 
         return response()->json($result);
     }
+
+    public function goodsDetail(Request $request)
+    {
+        $this->validate($request, [
+            'goods_id_list' => 'required|string',
+        ], [
+            'goods_id_list.required' => '商品 ID 不能为空',
+            'goods_id_list.string'   => '商品 ID 必须是整数数据类型',
+        ]);
+
+        $result = $this->pinDuoDuoClient->request('pdd.ddk.goods.detail', [
+            'goods_id_list' => $request->goods_id_list,
+        ]);
+
+        return response()->json($result);
+    }
 }
