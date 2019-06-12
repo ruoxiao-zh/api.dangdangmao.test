@@ -150,7 +150,7 @@ $api->version('v1', [
         // 商品标签列表
         $api->get('goods-opt', 'PinDuoDuoController@goodsOpt')->name('pdd.ddk.goods.opt');
         // 招商推广计划商品
-        $api->get('ddk-zs-unit-goods', 'PinDuoDuoController@zsUnitGoods')->name('pdd.ddk.zs.unit.goodss');
+        $api->get('ddk-zs-unit-goods', 'PinDuoDuoController@zsUnitGoods')->name('pdd.ddk.zs.unit.goods');
         // 获取爆款排行商品接口
         // $api->get('ddk-oauth-top-goods-list', 'PinDuoDuoController@oauthTopGoodsList')->name('pdd.ddk.oauth.top.goods.list');
         // 多多进宝商品查询
