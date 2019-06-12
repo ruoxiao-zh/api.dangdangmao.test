@@ -196,6 +196,12 @@ class PinDuoDuoController extends Controller
             'goods_id_list' => $request->goods_id_list,
         ]);
 
+        // 浏览记录
+        if ($goodsInfo = $result['goods_detail_response']['goods_details'][0]) {
+            (new ViewFootprintController())->addGoodsInfoToFootprint(3, $goodsInfo['goods_name'],
+                $goodsInfo['goods_image_url'], $goodsInfo['goods_id'], '');
+        }
+
         return response()->json($result);
     }
 }

@@ -74,6 +74,12 @@ class JDController extends Controller
         ]);
         $res = $this->JDClient->good->info($request->skuIds);
 
+        // 浏览记录
+        if ($goodsInfo = $res[0]) {
+            (new ViewFootprintController())->addGoodsInfoToFootprint(2, $goodsInfo['goodsName'],
+                $goodsInfo['imgUrl'], $goodsInfo['skuId'], $goodsInfo['materialUrl']);
+        }
+
         $result = [];
         if ($res) {
             $result['data'] = $res;

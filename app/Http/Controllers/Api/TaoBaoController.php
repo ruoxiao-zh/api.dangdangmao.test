@@ -73,6 +73,12 @@ class TaoBaoController extends Controller
         ];
         $res = $this->taoBaoKeClient->item->getInfo($param);
 
+        // 浏览记录
+        if ($goodsInfo = $res->results->n_tbk_item) {
+            (new ViewFootprintController())->addGoodsInfoToFootprint(1, ($goodsInfo[0])->title,
+                ($goodsInfo[0])->pict_url, ($goodsInfo[0])->num_iid, ($goodsInfo[0])->item_url);
+        }
+
         return response()->json($res);
     }
 

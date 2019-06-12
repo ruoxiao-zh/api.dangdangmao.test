@@ -84,6 +84,13 @@ $api->version('v1', [
         $api->delete('address/{address}', 'AddressController@destroy')
             ->name('api.address.destroy');
 
+        // 用户的浏览记录
+        $api->get('view-footprint', 'ViewFootprintController@index')
+            ->name('api.view.footprint.index');
+        // 删除用户的浏览记录
+        $api->delete('view-footprint', 'ViewFootprintController@destroy')
+            ->name('api.view.footprint.destroy');
+
         // 使用积分兑换优惠券
         // Todo...
         $api->post('use-integral-exchange-coupon', 'CouponController@exchangeCoupon')
