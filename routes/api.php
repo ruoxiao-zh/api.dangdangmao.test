@@ -83,6 +83,11 @@ $api->version('v1', [
         // 删除
         $api->delete('address/{address}', 'AddressController@destroy')
             ->name('api.address.destroy');
+
+        // 使用积分兑换优惠券
+        // Todo...
+        $api->post('use-integral-exchange-coupon', 'CouponController@exchangeCoupon')
+            ->name('api.exchange.coupon');
     });
 
     /**
@@ -98,7 +103,6 @@ $api->version('v1', [
     $api->get('categories', 'CategoriesController@index')->name('api.categories.list');
     // 详情
     $api->get('category/{category}', 'CategoriesController@show')->name('api.category.show');
-
 
     // 淘宝客
     $api->group(['prefix' => 'tbk'], function ($api) {
