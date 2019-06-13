@@ -200,13 +200,19 @@ class TaoBaoController extends Controller
 
     public function rebateOrder(Request $request)
     {
+        $this->validate($request, [
+            'start_time' => 'required|string',
+        ], [
+            'start_time.required' => '订单结算开始时间不能为空',
+            'start_time.string'   => '订单结算开始时间必须是字符串数据类型',
+        ]);
         $param = [
-            'fields'     => 'tb_trade_parent_id,tb_trade_id,num_iid,item_title,item_num,price,pay_price,seller_nick,seller_shop_title,commission,commission_rate,unid,create_time,earning_time',
-            'start_time' => '2019-03-05 13:52:08',
+            'fields'     => 'tb_trade_parent_id,tb_trade_id,num_iid,item_title,item_num,price,pay_price,seller_nick,seller_shop_title,commission,commission_rate,unid,create_time,earning_time,tk3rd_pub_id,tk3rd_site_id,tk3rd_adzone_id,relation_id,tb_trade_parent_id,tb_trade_id,num_iid,item_title,item_num,price,pay_price,seller_nick,seller_shop_title,commission,commission_rate,unid,create_time,earning_time,tk3rd_pub_id,tk3rd_site_id,tk3rd_adzone_id,special_id,click_time',
+            'start_time' => $request->time,
             'span'       => 60,
             'page_no'    => (int)$request->page_no,
         ];
-        $res = $this->taoBaoKeClient->rebate->getOrder($param);
+        $res = $this->taoBaoKeClient->order->get($param);
 
         return response()->json($res);
     }

@@ -48,17 +48,20 @@ class JDController extends Controller
         $this->validate($request, [
             'pageNo' => 'required|integer',
             'type'   => 'required|integer',
+            'time'   => 'required|string',
         ], [
             'pageNo.required' => '页码不能为空',
             'pageNo.integer'  => '页码必须是整数类型',
             'type.required'   => '订单时间查询类型不能为空',
             'type.integer'    => '订单时间查询类型串必须是整数类型',
+            'time.required'   => '查询时间不能为空',
+            'time.string'     => '查询时间必须是字符串数据类型',
         ]);
         $res = $this->JDClient->promotion->order([
             'pageNo'   => $request->pageNo,
             'pageSize' => 20,
             'type'     => (int)$request->type,
-            'time'     => date('YmdHi', time()),
+            'time'     => $request->time,
         ]);
 
         return response()->json($res);
