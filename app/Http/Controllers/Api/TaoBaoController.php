@@ -16,16 +16,32 @@ class TaoBaoController extends Controller
 
     public function __construct()
     {
-        $agent = new Agent();
-        if ($agent->isiOS()) {
-            $appkey = env('TAOBAO_IOS_APP_KEY', '');
-            $secretKey = env('TAOBAO_IOS_APP_SECRET', '');
-        } else if ($agent->isAndroidOS()) {
-            $appkey = env('TAOBAO_ANDROID_APP_KEY', '');
-            $secretKey = env('TAOBAO_ANDROID_APP_SECRET', '');
-        } else {
-            $appkey = env('TAOBAO_PC_APP_KEY', '');
-            $secretKey = env('TAOBAO_PC_APP_SECRET', '');
+//        $agent = new Agent();
+
+//        if ($agent->isiOS()) {
+//            $appkey = env('TAOBAO_IOS_APP_KEY', '');
+//            $secretKey = env('TAOBAO_IOS_APP_SECRET', '');
+//        } else if ($agent->isAndroidOS()) {
+//            $appkey = env('TAOBAO_ANDROID_APP_KEY', '');
+//            $secretKey = env('TAOBAO_ANDROID_APP_SECRET', '');
+//        } else {
+//            $appkey = env('TAOBAO_PC_APP_KEY', '');
+//            $secretKey = env('TAOBAO_PC_APP_SECRET', '');
+//        }
+
+        switch (request()->device) {
+            case 'Android':
+                $appkey = env('TAOBAO_ANDROID_APP_KEY', '');
+                $secretKey = env('TAOBAO_ANDROID_APP_SECRET', '');
+                break;
+            case 'iOS':
+                $appkey = env('TAOBAO_IOS_APP_KEY', '');
+                $secretKey = env('TAOBAO_IOS_APP_SECRET', '');
+                break;
+            case 'PC':
+                $appkey = env('TAOBAO_PC_APP_KEY', '');
+                $secretKey = env('TAOBAO_PC_APP_SECRET', '');
+                break;
         }
 
         $config = [
