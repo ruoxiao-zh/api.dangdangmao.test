@@ -42,6 +42,9 @@ class TaoBaoController extends Controller
                 $appkey = env('TAOBAO_PC_APP_KEY', '');
                 $secretKey = env('TAOBAO_PC_APP_SECRET', '');
                 break;
+            default:
+                $appkey = env('TAOBAO_PC_APP_KEY', '');
+                $secretKey = env('TAOBAO_PC_APP_SECRET', '');
         }
 
         $config = [
