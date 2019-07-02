@@ -43,16 +43,16 @@
         <div id="dis">
             <div id="limit">
                 <em>￥</em>
-                <strong>100</strong>
+                <strong>{{ $param['coupon_info'] }}</strong>
                 <span>
-                    <i>使用期限</i>
-                    <i>2019年01月01日-03日</i>
+                    <i style="float: left;">使用期限</i>
+                    <i style="float: right;">{{ $param['coupon_start_time'] }} - {{ $param['coupon_end_time'] }}</i>
                 </span>
             </div>
-            <a id="btn">立即领券</a>
+            <a id="btn" href="{{ $param['coupon_click_url'] }}" style="text-decoration: none;color: white;">立即领券</a>
         </div>
         <hr/>
-        <a href="" id="inte">2000积分立即兑换</a>
+{{--        <a href="" id="inte">2000积分立即兑换</a>--}}
     </div>
 @endif
 

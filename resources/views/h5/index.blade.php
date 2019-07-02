@@ -18,7 +18,9 @@
     {{--淘宝--}}
     <div class="list">
         @foreach($taoBaoKeCoupons as $key => $value)
-            <a href="{{ url('detail?type=taobao&num_iids='.$value->num_iid) }}">
+            <a href="{{ url('detail?type=taobao&num_iids='.$value->num_iid.'&coupon_click_url='.$value->coupon_click_url.
+            '&coupon_end_time='.$value->coupon_end_time.'&coupon_start_time='.$value->coupon_start_time.
+            '&coupon_info='.$value->coupon_info) }}">
                 <div class="list-img">
                     <div id="img">
                         <img src="{{ $value->pict_url }}" style="width: 345px; height: 210px;"/>

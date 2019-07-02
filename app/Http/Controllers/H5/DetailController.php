@@ -16,15 +16,15 @@ class DetailController extends Controller
 
     public function index(Request $request)
     {
-        $type = $request->type;
+        $param = $request->all();
 
         switch ($request->type) {
             case 'taobao':
                 $taoBaoKe = $this->taoBaoClientResult($request);
                 $taoBaoKeInfo = $taoBaoKe->results->n_tbk_item;
-                dump($taoBaoKeInfo);
+//                dump($taoBaoKeInfo);
 
-                return view('h5.detail', compact('type', 'taoBaoKeInfo'));
+                return view('h5.detail', compact('param', 'taoBaoKeInfo'));
             case 'jd':
 
         }

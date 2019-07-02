@@ -19,6 +19,7 @@ class IndexController extends Controller
     {
         $taoBaoKe = $this->taoBaoClientResult($request);
         $taoBaoKeCoupons = $taoBaoKe->results->tbk_coupon;
+//        dump($taoBaoKeCoupons);
 
         $jd = $this->jdClientResult($request);
         $jdData = $jd['data'];
