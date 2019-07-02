@@ -17,7 +17,6 @@ class TaoBaoController extends Controller
     public function __construct()
     {
 //        $agent = new Agent();
-
 //        if ($agent->isiOS()) {
 //            $appkey = env('TAOBAO_IOS_APP_KEY', '');
 //            $secretKey = env('TAOBAO_IOS_APP_SECRET', '');
