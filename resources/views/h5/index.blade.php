@@ -41,7 +41,9 @@
     {{--拼多多--}}
     <div class="list" style="display: none">
         @foreach($pinDuoDuoData as $key => $value)
-            <a href="">
+            <a href="{{ url('detail?type=pinduoduo&goods_id_list='.$value['goods_id'].
+            '&coupon_end_time='.$value['coupon_end_time'].'&coupon_start_time='.$value['coupon_start_time'].
+            '&coupon_discount='.$value['coupon_discount'].'&sold_quantity='.$value['sold_quantity']) }}">
                 <div class="list-img">
                     <div id="img">
                         <img src="
@@ -53,9 +55,9 @@
                             " style="width: 345px; height: 210px;"/>
                     </div>
                     <p style="background: url({{ asset('h5/image/pdd.png') }}) no-repeat 0 5px;">{{ str_limit($value['goods_name'], 40) }}</p>
-                    <strong>最小单买价：￥{{ $value['min_normal_price'] / 100 }}</strong>
+                    <strong>最小单买价：￥{{ $value['min_group_price'] / 100 }}</strong>
                     <div id="tick">
-                        <span>券后价<em>￥</em><i>{{ ($value['min_normal_price'] - $value['coupon_discount']) / 100 }}</i></span>
+                        <span>券后价<em>￥</em><i>{{ ($value['min_group_price'] - $value['coupon_discount']) / 100 }}</i></span>
                         <div id="btn">{{ $value['coupon_discount'] / 100 }}元券</div>
                     </div>
                     <img src="{{ asset('h5/image/hot.png') }}" id="right">

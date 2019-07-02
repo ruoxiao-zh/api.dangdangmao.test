@@ -5,6 +5,7 @@ namespace App\Http\Controllers\H5;
 use ETaobao\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Justmd5\DuoDuoKe\DuoDuoKe;
 
 class DetailController extends Controller
 {
@@ -25,7 +26,15 @@ class DetailController extends Controller
 //                dump($taoBaoKeInfo);
 
                 return view('h5.detail', compact('param', 'taoBaoKeInfo'));
-            case 'jd':
+            case 'pinduoduo':
+                $pinDuoDuo = $this->pinDuoDuoClient($request);
+                $pinDuoDuoInfo = $pinDuoDuo['goods_basic_detail_response']['goods_list'][0];
+//                dump($pinDuoDuoInfo);
+
+                $pinDuoDuoShare = $this->pinDuoDuoClientShare($request);
+                $pinDuoDuoShareData = $pinDuoDuoShare['goods_promotion_url_generate_response']['goods_promotion_url_list'][0];
+
+                return view('h5.detail', compact('param', 'pinDuoDuoInfo', 'pinDuoDuoShareData'));
 
         }
 
@@ -51,5 +60,37 @@ class DetailController extends Controller
         ];
 
         return $this->taoBaoKeClient->item->getInfo($param);
+    }
+
+    private function pinDuoDuoClient(Request $request)
+    {
+        $config = [
+            'key'    => env('PINDUODUO_CLIENT_ID', ''),
+            'secret' => env('PINDUODUO_CLIENT_SECRET', ''),
+            'debug'  => true,
+        ];
+
+        $this->pinDuoDuoClient = new DuoDuoKe($config);
+
+        return $this->pinDuoDuoClient->request('pdd.ddk.goods.basic.info.get', [
+            'goods_id_list' => array($request->goods_id_list),
+        ]);
+    }
+
+    private function pinDuoDuoClientShare(Request $request)
+    {
+        $config = [
+            'key'    => env('PINDUODUO_CLIENT_ID', ''),
+            'secret' => env('PINDUODUO_CLIENT_SECRET', ''),
+            'debug'  => true,
+        ];
+
+        $this->pinDuoDuoClient = new DuoDuoKe($config);
+
+        return $this->pinDuoDuoClient->request('pdd.ddk.goods.promotion.url.generate', [
+            'p_id'          => env('PINDUODUO_PID', ''),
+            'goods_id_list' => array($request->goods_id_list),
+        ]);
+
     }
 }
