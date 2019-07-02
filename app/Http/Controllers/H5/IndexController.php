@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\TaoBaoController;
 use ETaobao\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Justmd5\DuoDuoKe\DuoDuoKe;
 
 class IndexController extends Controller
 {
@@ -13,18 +14,20 @@ class IndexController extends Controller
 
     private $JDClient;
 
+    private $pinDuoDuoClient;
 
     public function index(Request $request)
     {
         $taoBaoKe = $this->taoBaoClientResult($request);
         $taoBaoKeCoupons = $taoBaoKe->results->tbk_coupon;
-//        dump($taoBaoKe);
 
         $jd = $this->jdClientResult($request);
         $jdData = $jd['data'];
-        dump($jd['data']);
 
-        return view('h5.index', compact('taoBaoKeCoupons', 'jdData'));
+        $pinDuoDuo = $this->pinDuoDuoClient($request);
+        $pinDuoDuoData = $pinDuoDuo['goods_search_response']['goods_list'];
+
+        return view('h5.index', compact('taoBaoKeCoupons', 'jdData', 'pinDuoDuoData'));
     }
 
     private function taoBaoClientResult(Request $request)
@@ -71,6 +74,23 @@ class IndexController extends Controller
 
         $this->JDClient = new \JdMediaSdk\JdFatory($config);
 
-        return $this->JDClient->good->jingfen(1, 1, 10);
+        return $this->JDClient->good->jingfen(1, 1, 50);
+    }
+
+    private function pinDuoDuoClient(Request $request)
+    {
+        $config = [
+            'key'    => env('PINDUODUO_CLIENT_ID', ''),
+            'secret' => env('PINDUODUO_CLIENT_SECRET', ''),
+            'debug'  => true,
+        ];
+
+        $this->pinDuoDuoClient = new DuoDuoKe($config);
+
+        return $this->pinDuoDuoClient->request('pdd.ddk.goods.search', [
+            'keyword'   => '美妆',
+            'page'      => $request->page ?? 1,
+            'page_size' => 100,
+        ]);
     }
 }

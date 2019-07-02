@@ -9,34 +9,13 @@
 <body>
 <div id="main">
     <ul id="nav-list">
-        <li>京东</li>
         <li class="nav-list">淘宝</li>
         <li>拼多多</li>
+        <li>京东</li>
     </ul>
 
-    <div class="list" style="display: none">
-        @foreach($jdData as $key => $value)
-            <a href="">
-                <div class="list-img">
-                    <div id="img">
-                        <img src="{{ $value['imageInfo']['imageList'][0]['url'] }}" style="width: 345px; height: 210px;"/>
-                    </div>
-                    <p style="background: url({{ asset('h5/image/jd.png') }}) no-repeat 0 5px;">{{ str_limit($value['skuName'], 42) }}</p>
-                    <strong>淘宝价：￥999</strong>
-                    <div id="tick">
-                        <span>券后价<em>￥</em><i>{{ $value['skuName'] }}</i></span>
-                        <div id="btn">
-                            @if(isset($value['couponInfo']['couponList'][0]))
-                                {{ $value['couponInfo']['couponList'][0]['discount'] }}
-                            @endif元券</div>
-                    </div>
-                    <img src="{{ asset('h5/image/hot.png') }}" id="right">
-                </div>
-            </a>
-        @endforeach
-    </div>
 
-
+    {{--淘宝--}}
     <div class="list">
         @foreach($taoBaoKeCoupons as $key => $value)
             <a href="">
@@ -57,52 +36,64 @@
         @endforeach
     </div>
 
-
+    {{--拼多多--}}
     <div class="list" style="display: none">
-        <a href="">
-            <div class="list-img">
-                <div id="img">
-                    <img/>
+        @foreach($pinDuoDuoData as $key => $value)
+            <a href="">
+                <div class="list-img">
+                    <div id="img">
+                        <img src="
+                            @if(!empty($value['goods_image_url']))
+                                {{ $value['goods_image_url'] }}
+                            @else
+                                {{ $value['goods_thumbnail_url'] }}
+                            @endif
+                        " style="width: 345px; height: 210px;"/>
+                    </div>
+                    <p style="background: url({{ asset('h5/image/pdd.png') }}) no-repeat 0 5px;">{{ str_limit($value['goods_name'], 40) }}</p>
+                    <strong>最小单买价：￥{{ $value['min_normal_price'] / 100 }}</strong>
+                    <div id="tick">
+                        <span>券后价<em>￥</em><i>{{ ($value['min_normal_price'] - $value['coupon_discount']) / 100 }}</i></span>
+                        <div id="btn">{{ $value['coupon_discount'] / 100 }}元券</div>
+                    </div>
+                    <img src="{{ asset('h5/image/hot.png') }}" id="right">
                 </div>
-                <p style="background: url({{ asset('h5/image/pdd.png') }}) no-repeat 0 5px;">技术宅经典款数据充值线线数据充值线线</p>
-                <strong>淘宝价：￥999</strong>
-                <div id="tick">
-                    <span>券后价<em>￥</em><i>990</i></span>
-                    <div id="btn">900元券</div>
-                </div>
-                <img src="{{ asset('h5/image/hot.png') }}" id="right">
-            </div>
-        </a>
+            </a>
+        @endforeach
+    </div>
 
-        <a href="">
-            <div class="list-img">
-                <div id="img">
-                    <img/>
+    {{--京东--}}
+    <div class="list" style="display: none">
+        @foreach($jdData as $key => $value)
+            <a href="">
+                <div class="list-img">
+                    <div id="img">
+                        <img src="{{ $value['imageInfo']['imageList'][0]['url'] }}"
+                             style="width: 345px; height: 210px;"/>
+                    </div>
+                    <p style="background: url({{ asset('h5/image/jd.png') }}) no-repeat 0 5px;">{{ str_limit($value['skuName'], 42) }}</p>
+                    <strong>京东价：￥{{ $value['priceInfo']['price'] }}</strong>
+                    <div id="tick">
+                        <span>券后价<em>￥</em><i>
+                                @if(isset($value['couponInfo']['couponList'][0]))
+                                    {{ $value['priceInfo']['price'] - $value['couponInfo']['couponList'][0]['discount'] }}
+                                @else
+                                    {{ $value['priceInfo']['price'] }}
+                                @endif
+                            </i></span>
+                        <div id="btn">
+                            @if(isset($value['couponInfo']['couponList'][0]))
+                                {{ $value['couponInfo']['couponList'][0]['discount'] }}
+                            @else
+                                0
+                            @endif
+                            元券
+                        </div>
+                    </div>
+                    <img src="{{ asset('h5/image/hot.png') }}" id="right">
                 </div>
-                <p>技术宅经典款数据充值线线数据充值线线</p>
-                <strong>淘宝价：￥999</strong>
-                <div id="tick">
-                    <span>券后价<em>￥</em><i>990</i></span>
-                    <div id="btn">900元券</div>
-                </div>
-                <img src="{{ asset('h5/image/hot.png') }}" id="right">
-            </div>
-        </a>
-
-        <a href="">
-            <div class="list-img">
-                <div id="img">
-                    <img/>
-                </div>
-                <p>技术宅经典款数据充值线线数据充值线线</p>
-                <strong>淘宝价：￥999</strong>
-                <div id="tick">
-                    <span>券后价<em>￥</em><i>990</i></span>
-                    <div id="btn">900元券</div>
-                </div>
-                <img src="{{ asset('h5/image/hot.png') }}" id="right">
-            </div>
-        </a>
+            </a>
+        @endforeach
     </div>
 
 </div>
