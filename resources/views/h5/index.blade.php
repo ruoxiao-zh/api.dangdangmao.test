@@ -18,7 +18,7 @@
     {{--淘宝--}}
     <div class="list">
         @foreach($taoBaoKeCoupons as $key => $value)
-            <a href="">
+            <a href="{{ url('detail?type=taobao&num_iids='.$value->num_iid) }}">
                 <div class="list-img">
                     <div id="img">
                         <img src="{{ $value->pict_url }}" style="width: 345px; height: 210px;"/>
@@ -44,11 +44,11 @@
                     <div id="img">
                         <img src="
                             @if(!empty($value['goods_image_url']))
-                                {{ $value['goods_image_url'] }}
-                            @else
-                                {{ $value['goods_thumbnail_url'] }}
-                            @endif
-                        " style="width: 345px; height: 210px;"/>
+                        {{ $value['goods_image_url'] }}
+                        @else
+                        {{ $value['goods_thumbnail_url'] }}
+                        @endif
+                            " style="width: 345px; height: 210px;"/>
                     </div>
                     <p style="background: url({{ asset('h5/image/pdd.png') }}) no-repeat 0 5px;">{{ str_limit($value['goods_name'], 40) }}</p>
                     <strong>最小单买价：￥{{ $value['min_normal_price'] / 100 }}</strong>

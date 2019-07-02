@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\H5;
 
-use App\Http\Controllers\Api\TaoBaoController;
 use ETaobao\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
