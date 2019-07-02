@@ -194,6 +194,7 @@ class TaoBaoController extends Controller
             'platform'  => (int)$request->platform,
             'q'         => $request->q,
             'page_no'   => (int)$request->page_no,
+            'page_size' => 100,
         ];
         $res = $this->taoBaoKeClient->dg->getCoupon($param);
 
