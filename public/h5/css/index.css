@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+html {
+    font-size: 13.33vw
+}
+
+#main {
+    width: 100%;
+}
+
+#main #nav-list {
+    width: 100%;
+    height: 0.88rem;
+}
+
+#main #nav-list li {
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    float: left;
+    list-style: none;
+    line-height: 0.88rem;
+    color: #666;
+    font-size: 0.28rem;
+    border-bottom: 1px solid #666;
+}
+
+.nav-list {
+    color: #EF8742 !important;
+    font-size: 0.32rem !important;
+    border-bottom: 1px solid #EF8742 !important;
+}
+
+
+#main .list {
+    width: 100%;
+    /* min-height:5rem; */
+}
+
+#main .list .list-img {
+    width: 3.44rem;
+    height: 4rem;
+    float: left;
+    margin-left: 0.2rem;
+    margin-top: 0.2rem;
+    position: relative;
+}
+
+#main .list .list-img #right {
+    position: absolute;
+    top: 0.1rem;
+    right: 0.15rem;
+}
+
+#main .list .list-img #img {
+    width: 100%;
+    height: 2.12rem;
+    background: rgba(245, 245, 245, 1);
+    border-radius: 14px;
+}
+
+#main .list .list-img p {
+    width: 100%;
+    height: 0.8rem;
+    margin-top: 0.1rem;
+    font-size: 0.28rem;
+    color: #333;
+    background: url('../image/tb.png') no-repeat 0 5px;
+    text-indent: 0.35rem;
+}
+
+#main .list .list-img strong {
+    width: 100%;
+    height: 0.28rem;
+    margin-top: 0.1rem;
+    font-size: 0.2rem;
+    color: #999;
+    display: block;
+    font-weight: normal;
+    text-decoration: line-through;
+}
+
+#main .list .list-img #tick {
+    width: 100%;
+    height: 0.4rem;
+    font-size: 0.28rem;
+    margin-top: 0.1rem;
+}
+
+#main .list .list-img #tick span {
+    height: 100%;
+    line-height: 0.4rem;
+    float: left;
+    font-size: 0.26rem;
+    color: #E98053;
+}
+
+#main .list .list-img #tick span em {
+    font-size: 0.16rem;
+    font-style: normal;
+}
+
+#main .list .list-img #tick span i {
+    margin-left: 0.1rem;
+    font-style: normal;
+    font-weight: bold;
+}
+
+#main .list .list-img #tick #btn {
+    width: 1.26rem;
+    height: 100%;
+    line-height: 0.4rem;
+    float: right;
+    font-size: 0.2rem;
+    color: #fff;
+    text-align: center;
+    background: url('../image/tick-bj.png') no-repeat;
+}
