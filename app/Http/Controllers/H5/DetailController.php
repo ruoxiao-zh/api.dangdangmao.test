@@ -31,6 +31,7 @@ class DetailController extends Controller
                 $pinDuoDuoInfo = $pinDuoDuo['goods_basic_detail_response']['goods_list'][0];
 //                dump($pinDuoDuoInfo);
 
+            
                 $pinDuoDuoShare = $this->pinDuoDuoClientShare($request);
                 $pinDuoDuoShareData = $pinDuoDuoShare['goods_promotion_url_generate_response']['goods_promotion_url_list'][0];
 
