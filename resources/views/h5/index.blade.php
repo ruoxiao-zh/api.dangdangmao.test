@@ -69,7 +69,7 @@
     {{--京东--}}
     <div class="list" style="display: none">
         @foreach($jdData as $key => $value)
-            <a href="">
+            <a href="{{ url('detail?type=jd&skuIds='.$value['skuId'].'&couponInfo='.urlencode(json_encode($value['couponInfo'], true))) }}">
                 <div class="list-img">
                     <div id="img">
                         <img src="{{ $value['imageInfo']['imageList'][0]['url'] }}"
@@ -78,7 +78,8 @@
                     <p style="background: url({{ asset('h5/image/jd.png') }}) no-repeat 0 5px;">{{ str_limit($value['skuName'], 42) }}</p>
                     <strong>京东价：￥{{ $value['priceInfo']['price'] }}</strong>
                     <div id="tick">
-                        <span>券后价<em>￥</em><i>
+                        <span>券后价<em>￥</em>
+                            <i>
                                 @if(isset($value['couponInfo']['couponList'][0]))
                                     {{ $value['priceInfo']['price'] - $value['couponInfo']['couponList'][0]['discount'] }}
                                 @else

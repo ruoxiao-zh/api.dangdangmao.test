@@ -96,6 +96,48 @@
     </div>
 @endif
 
+@if(isset($jdData))
+    <div id="detail">
+        <div class="warp" id='warp'>
+            <ul id="pic">
+                <li><img src="{{ $jdData['imgUrl'] }}" /></li>
+            </ul>
+            <ol id="list">
+                <li class="on"></li>
+            </ol>
+            <div id="left" ><img src="{{ asset('h5/image/back.png') }}" onclick="history.back();" /></div>
+            <div id="right"><img src="{{ asset('h5/image/cart.png') }}"></div>
+        </div>
+
+        <hr />
+        <p id="desc">{{ str_limit($jdData['goodsName'], 82) }}</p>
+        <div id="price">
+{{--            <p><strong>券后价</strong><em>￥</em><i>{{ ($pinDuoDuoInfo['min_group_price'] - $param['coupon_discount']) / 100 }}</i></p>--}}
+            <p><strong>京东价</strong><em>￥</em><i>{{ $jdData['unitPrice'] }}</i></p>
+            <span>
+                <img src="{{ asset('h5/image/coll.png') }}" />
+                <i>30 天已售：{{ $jdData['inOrderCount'] }}</i>
+            </span>
+        </div>
+
+        @foreach($couponInfo['couponList'] as $k => $v)
+            <div id="dis">
+                <div id="limit">
+                    <em>￥</em>
+                    <strong>{{ $v['discount'] }}</strong>
+                    <span>
+                        <i style="">使用期限</i>
+                        <i>{{ date('Y-m-d', $v['useStartTime'] / 1000) }} - {{ date('Y-m-d', $v['useEndTime'] / 1000) }}</i>
+                    </span>
+                </div>
+                <a id="btn" href="{{ $v['link'] }}" style="text-decoration: none;color: white;">立即领券</a>
+            </div>
+        @endforeach
+        <hr />
+        {{--        <a href="" id="inte">2000积分立即兑换</a>--}}
+    </div>
+@endif
+
 <script src="{{ asset('h5/js/jquery.min.js') }}"></script>
 <script src="{{ asset('h5/js/jq.js') }}"></script>
 <script src="{{ asset('h5/js/js.js') }}"></script>

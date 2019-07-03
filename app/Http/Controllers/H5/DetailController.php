@@ -31,12 +31,21 @@ class DetailController extends Controller
                 $pinDuoDuoInfo = $pinDuoDuo['goods_basic_detail_response']['goods_list'][0];
 //                dump($pinDuoDuoInfo);
 
-            
                 $pinDuoDuoShare = $this->pinDuoDuoClientShare($request);
                 $pinDuoDuoShareData = $pinDuoDuoShare['goods_promotion_url_generate_response']['goods_promotion_url_list'][0];
 
                 return view('h5.detail', compact('param', 'pinDuoDuoInfo', 'pinDuoDuoShareData'));
 
+            case 'jd':
+                $jd = $this->jdClientResult($request);
+                $jdData = $jd[0];
+//                dump($jdData);
+
+                $couponInfo = urldecode($request->couponInfo);
+                $couponInfo = json_decode($couponInfo, true);
+//                dump($couponInfo);
+
+                return view('h5.detail', compact('param', 'jdData', 'couponInfo'));
         }
 
     }
@@ -74,7 +83,7 @@ class DetailController extends Controller
         $this->pinDuoDuoClient = new DuoDuoKe($config);
 
         return $this->pinDuoDuoClient->request('pdd.ddk.goods.basic.info.get', [
-            'goods_id_list' => array($request->goods_id_list),
+            'goods_id_list' => [$request->goods_id_list],
         ]);
     }
 
@@ -90,8 +99,30 @@ class DetailController extends Controller
 
         return $this->pinDuoDuoClient->request('pdd.ddk.goods.promotion.url.generate', [
             'p_id'          => env('PINDUODUO_PID', ''),
-            'goods_id_list' => array($request->goods_id_list),
+            'goods_id_list' => [$request->goods_id_list],
         ]);
+    }
 
+    private function jdClientResult(Request $request)
+    {
+        $appkey = env('JD_ANDROID_APP_KEY', ''); // AppId
+        $appSecret = env('JD_ANDROID_APP_SECRET_KEY', ''); // 密钥
+        $positionId = env('JD_ANDROID_PROMOTION_ID', ''); // 推广位ID
+        $siteId = env('JD_ANDROID_APP_ID', ''); // 网站ID,
+
+        $config = [
+            'appkey'     => $appkey, // AppId
+            'appSecret'  => $appSecret, // 密钥
+            'unionId'    => 1001558867, // 联盟ID
+            'positionId' => $positionId, // 推广位ID
+            'siteId'     => $siteId, // 网站ID,
+            'apithId'    => '',  // 第三方网站Apith的appid （可选，不使用apith的，可以不用填写）
+            'apithKey'   => '', // 第三方网站Apith的appSecret (可选，不使用apith的，可以不用填写)
+            'isCurl'     => true // 设置为true的话，强制使用php的curl，为false的话，在swoole cli环境下自动启用 http协程客户端
+        ];
+
+        $this->JDClient = new \JdMediaSdk\JdFatory($config);
+
+        return $this->JDClient->good->info($request->skuIds);;
     }
 }
