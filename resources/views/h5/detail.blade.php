@@ -113,6 +113,7 @@
         <p id="desc">{{ str_limit($jdData['goodsName'], 82) }}</p>
         <div id="price">
 {{--            <p><strong>券后价</strong><em>￥</em><i>{{ ($pinDuoDuoInfo['min_group_price'] - $param['coupon_discount']) / 100 }}</i></p>--}}
+            <p><em></em></p>
             <p><strong>京东价</strong><em>￥</em><i>{{ $jdData['unitPrice'] }}</i></p>
             <span>
                 <img src="{{ asset('h5/image/coll.png') }}" />
