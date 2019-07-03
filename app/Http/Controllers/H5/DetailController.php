@@ -23,27 +23,22 @@ class DetailController extends Controller
             case 'taobao':
                 $taoBaoKe = $this->taoBaoClientResult($request);
                 $taoBaoKeInfo = $taoBaoKe->results->n_tbk_item;
-//                dump($taoBaoKeInfo);
 
                 return view('h5.detail', compact('param', 'taoBaoKeInfo'));
             case 'pinduoduo':
                 $pinDuoDuo = $this->pinDuoDuoClient($request);
                 $pinDuoDuoInfo = $pinDuoDuo['goods_basic_detail_response']['goods_list'][0];
-//                dump($pinDuoDuoInfo);
 
                 $pinDuoDuoShare = $this->pinDuoDuoClientShare($request);
                 $pinDuoDuoShareData = $pinDuoDuoShare['goods_promotion_url_generate_response']['goods_promotion_url_list'][0];
 
                 return view('h5.detail', compact('param', 'pinDuoDuoInfo', 'pinDuoDuoShareData'));
-
             case 'jd':
                 $jd = $this->jdClientResult($request);
                 $jdData = $jd[0];
-//                dump($jdData);
 
                 $couponInfo = urldecode($request->couponInfo);
                 $couponInfo = json_decode($couponInfo, true);
-//                dump($couponInfo);
 
                 return view('h5.detail', compact('param', 'jdData', 'couponInfo'));
         }
