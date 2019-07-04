@@ -92,7 +92,7 @@
                             @else
                                 0
                             @endif
-                            元券
+                                元券
                         </div>
                     </div>
                     <img src="{{ asset('h5/image/hot.png') }}" id="right">
