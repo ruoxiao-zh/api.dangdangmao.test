@@ -105,6 +105,9 @@
 
 <script src="{{ asset('h5/js/jquery.min.js') }}"></script>
 <script src="{{ asset('h5/js/jq.js') }}"></script>
+<script>
+
+</script>
 
 </body>
 </html>
