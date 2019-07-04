@@ -23,7 +23,7 @@
             '&coupon_info='.$value->coupon_info) }}">
                 <div class="list-img">
                     <div id="img">
-                        <img src="{{ $value->pict_url }}" style="width: 345px; height: 210px;"/>
+                        <img src="{{ $value->pict_url }}" style="width: 100%; height: 2.12rem;"/>
                     </div>
                     <p style="background: url({{ asset('h5/image/tb.png') }}) no-repeat 0 5px;">{{ str_limit($value->title, 40) }}</p>
                     <strong></strong>
@@ -48,11 +48,11 @@
                     <div id="img">
                         <img src="
                             @if(!empty($value['goods_image_url']))
-                        {{ $value['goods_image_url'] }}
-                        @else
-                        {{ $value['goods_thumbnail_url'] }}
-                        @endif
-                            " style="width: 345px; height: 210px;"/>
+                                {{ $value['goods_image_url'] }}
+                            @else
+                                {{ $value['goods_thumbnail_url'] }}
+                            @endif
+                            " style="width: 100%; height: 2.12rem;"/>
                     </div>
                     <p style="background: url({{ asset('h5/image/pdd.png') }}) no-repeat 0 5px;">{{ str_limit($value['goods_name'], 40) }}</p>
                     <strong>最小单买价：￥{{ $value['min_group_price'] / 100 }}</strong>
@@ -73,7 +73,7 @@
                 <div class="list-img">
                     <div id="img">
                         <img src="{{ $value['imageInfo']['imageList'][0]['url'] }}"
-                             style="width: 345px; height: 210px;"/>
+                             style="width: 100%; height: 2.12rem;"/>
                     </div>
                     <p style="background: url({{ asset('h5/image/jd.png') }}) no-repeat 0 5px;">{{ str_limit($value['skuName'], 42) }}</p>
                     <strong>京东价：￥{{ $value['priceInfo']['price'] }}</strong>
